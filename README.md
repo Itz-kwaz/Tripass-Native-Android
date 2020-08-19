@@ -1,4 +1,4 @@
-# Tripass-Native-Android
+# Tripass-Native-Android:rose:
 
 A trip book marking android app built using Java.[**Provider**](https://pub.dev/packages/provider)
 
@@ -9,5 +9,12 @@ A trip book marking android app built using Java.[**Provider**](https://pub.dev/
 - [x] Add Trips.
 
 ## 📸 ScreenShots
-[link to Google!](http://google.com)
-[**Provider**](https://pub.dev/packages/provider)
+<img src="/image1.png" width="400">
+<img src="/image2.png" width="400">
+<img src="/image3.png" width="400">
+
+## 🔌 Dependencies
+| Name | Usage |
+|------|-------|
+|[**Room**](https://developer.android.com/topic/libraries/architecture/room)| Data Storage|
+|[**Navigation Component**](https://developer.android.com/guide/navigation)| Navigation|
