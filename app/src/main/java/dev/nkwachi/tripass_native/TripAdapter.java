@@ -106,7 +106,10 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.MyViewHolder> 
 
     @Override
     public int getItemCount() {
+        if(allTrips != null)
         return allTrips.size();
+
+        return 0;
     }
 
 

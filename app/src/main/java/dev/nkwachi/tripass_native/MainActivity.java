@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements iMainActivity {
     @Override
     public void updateTrip(Trip trip) {
         mViewModel.update(trip);
+        navController.navigate(R.id.homeFragment);
     }
 
     @Override

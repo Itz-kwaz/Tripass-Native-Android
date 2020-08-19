@@ -16,6 +16,8 @@
     <string name="education">Education</string>
     <string name="update">Update</string>
     <string name="delete">Delete</string>
+    <string name="updateTrip">Update Trip</string>
+    <string name="updateATrip">Update a Trip</string>
     <string-array name="trip_type_array">
         <item>Business</item>
         <item>Vacation</item>

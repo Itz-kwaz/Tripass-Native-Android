@@ -19,7 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TimePicker;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Calendar;
@@ -38,6 +38,8 @@ public class AddTripFragment extends Fragment implements AdapterView.OnItemSelec
 
     private iMainActivity iMainActivity;
     private int tripType = 1;
+    private ArrayAdapter<CharSequence> adapter;
+    private Spinner spinner;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -45,9 +47,7 @@ public class AddTripFragment extends Fragment implements AdapterView.OnItemSelec
         iMainActivity = (iMainActivity) context;
     }
 
-    public AddTripFragment() {
-        // Required empty public constructor
-    }
+
 
 
     @Override
@@ -71,9 +71,11 @@ public class AddTripFragment extends Fragment implements AdapterView.OnItemSelec
         arrivalDate = view.findViewById(R.id.arrival_date);
         arrivalTime = view.findViewById(R.id.departure_time);
 
-        Spinner spinner = view.findViewById(R.id.spinner);
+        spinner = view.findViewById(R.id.spinner);
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(requireContext(),
+        TextView textView = view.findViewById(R.id.textView4);
+
+        adapter = ArrayAdapter.createFromResource(requireContext(),
                 R.array.trip_type_array, android.R.layout.simple_spinner_item);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -82,22 +84,21 @@ public class AddTripFragment extends Fragment implements AdapterView.OnItemSelec
         spinner.setOnItemSelectedListener(this);
 
         Button button = view.findViewById(R.id.button);
+        if(trip != null)
+        {
+            button.setText(R.string.updateTrip);
+            textView.setText(R.string.updateATrip);
+        }
         button.setOnClickListener(view1 -> {
 
             if(validateFields()){
                 if(trip == null){
                     trip = new Trip();
-                    trip.setArrivalDate(arrivalDate.getText().toString());
-                    trip.setDepartureCity(departureCity.getText().toString());
-                    trip.setArrivalTime(arrivalTime.getText().toString());
-
-                    trip.setTripType(tripType);
-
-                    trip.setDestinationCity(destinationCity.getText().toString());
-                    trip.setDepartureDate(departureDate.getText().toString());
-                    trip.setDepartureTime(departureTime.getText().toString());
-
+                    updateValues();
                     iMainActivity.insertTrip(trip);
+                }else {
+                    updateValues();
+                    iMainActivity.updateTrip(trip);
                 }
             }else{
                 Toast.makeText(getActivity(),"Fill Empty fields",Toast.LENGTH_SHORT).show();
@@ -124,8 +125,25 @@ public class AddTripFragment extends Fragment implements AdapterView.OnItemSelec
             destinationCity.setText(trip.getDestinationCity());
             arrivalDate.setText(trip.getArrivalDate());
             arrivalTime.setText(trip.getArrivalTime());
+
+            spinner.setSelection(trip.getTripType());
+
+
         }
 
+    }
+
+    private void updateValues()
+    {
+        trip.setArrivalDate(arrivalDate.getText().toString());
+        trip.setDepartureCity(departureCity.getText().toString());
+        trip.setArrivalTime(arrivalTime.getText().toString());
+
+        trip.setTripType(tripType);
+
+        trip.setDestinationCity(destinationCity.getText().toString());
+        trip.setDepartureDate(departureDate.getText().toString());
+        trip.setDepartureTime(departureTime.getText().toString());
     }
 
     private boolean validateFields()
